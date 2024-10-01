@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/6502_emu.dir/main.cpp.o CMakeFiles/6502_emu.dir/cpu.cpp.o CMakeFiles/6502_emu.dir/inst.cpp.o -o ../bin/6502_emu 

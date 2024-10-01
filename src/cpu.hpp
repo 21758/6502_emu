@@ -75,6 +75,12 @@ struct CPU {
     return mem[PC ++];
   }
 
+  Byte ReadAddr( Byte Addr, u32& Cycles )
+  {
+    Cycles --;
+    return mem[(Word) Addr];
+  }
+
   void Execute( u32 Cycles );
 };
 

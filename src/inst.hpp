@@ -16,6 +16,7 @@ class Inst {
             INST_LDA_IND_X = 0xA1,
             INST_LDA_IND_Y = 0xB1;
         
+        static void LDASetStatus(CPU& cpu);
         static void LDA_IM(CPU& cpu, u32& Cycles);
         static void LDA_ZP(CPU& cpu, u32& Cycles);
         static void LDA_ZP_X(CPU& cpu, u32& Cycles);

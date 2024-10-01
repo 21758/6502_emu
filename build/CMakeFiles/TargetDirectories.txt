@@ -1,5 +1,0 @@
-/root/6502_emu/build/CMakeFiles/edit_cache.dir
-/root/6502_emu/build/CMakeFiles/rebuild_cache.dir
-/root/6502_emu/build/src/CMakeFiles/6502_emu.dir
-/root/6502_emu/build/src/CMakeFiles/edit_cache.dir
-/root/6502_emu/build/src/CMakeFiles/rebuild_cache.dir

@@ -11,8 +11,11 @@ void CPU::Execute( u32 Cycles )
       switch (inst)
       {
         case Inst::INST_LDA_IM:
-            Inst::LDA_IM(*this, Cycles);
-            break;
+          Inst::LDA_IM(*this, Cycles);
+          break;
+        case Inst::INST_LDA_ZP: 
+          Inst::LDA_ZP(*this, Cycles);
+          break;
         default:
         {
           printf("Invalid Inst: %x\n", inst);
