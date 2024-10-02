@@ -10,13 +10,12 @@ set(HEADERS
     inst.hpp
 )
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 
-    ${CMAKE_BINARY_DIR}/bin
+add_library(src_library
+    ${SOURCES}
+    ${HEADERS}
 )
 
-add_executable(6502_emu ${SOURCES} ${HEADERS})
-
-target_include_directories(6502_emu
+target_include_directories(src_library
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
     PUBLIC

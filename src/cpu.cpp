@@ -16,6 +16,12 @@ void CPU::Execute( u32 Cycles )
         case Inst::INST_LDA_ZP: 
           Inst::LDA_ZP(*this, Cycles);
           break;
+        case Inst::INST_LDA_ZP_X:
+          Inst::LDA_ZP_X(*this, Cycles);
+          break;
+        // case Inst::INST_JSR_ABS:
+        //   Inst::JMP_ABS(*this, Cycles);
+        //   break;
         default:
         {
           printf("Invalid Inst: %x\n", inst);

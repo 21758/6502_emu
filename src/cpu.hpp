@@ -31,6 +31,9 @@ struct CPU {
 
   Word PC;
   Word SP;    // 0x0100 - 0x01ff
+  static constexpr Word
+    MAX_SP = 0x1FF,
+    MIN_SP = 0x100;
 
   Byte A, X, Y, PS;
 
@@ -56,6 +59,12 @@ struct CPU {
       return c ? (R & ~x) : R;
     }
 
+  Word addM(Byte a, Byte b, u32& Cycles)
+  {
+    Cycles --;
+    return ((Word)a + (Word)b) & (Word)bitA;
+  }
+
   void Reset() 
   {
     PC = 0xFFFC;
@@ -73,6 +82,33 @@ struct CPU {
   {
     Cycles --;
     return mem[PC ++];
+  }
+
+  Word FetchWord( u32& Cycles )
+  {
+    Cycles -= 2;
+    Word hByte = mem[PC ++] << 8;
+    return hByte | mem[PC ++];
+  }
+
+  void Push(Byte Data, u32& Cycles )
+  {
+    assert(SP <= MAX_SP);
+    Cycles --;
+    mem[SP ++] = Data;
+  }
+
+  Byte Pop( u32& Cycles )
+  {
+    assert(SP >= MIN_SP);
+    Cycles --;
+    return mem[-- SP];
+  }
+
+  void SetPC(Word TargetAddr, u32& Cycles )
+  {
+    Cycles --;
+    PC = TargetAddr;
   }
 
   Byte ReadAddr( Byte Addr, u32& Cycles )
