@@ -4,6 +4,7 @@
 using Byte = unsigned char;
 using Word = unsigned short;
 using u32 = unsigned int;
+using s32 = int;
 
 struct Mem {
   static constexpr u32 MAX_MEM = 1024 * 64;  // 64 KB
@@ -117,6 +118,6 @@ struct CPU {
     return mem[(Word) Addr];
   }
 
-  void Execute( u32 Cycles );
+  s32 Execute( u32 Cycles );
 };
 

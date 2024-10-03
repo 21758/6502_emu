@@ -3,7 +3,7 @@
 #include "cpu.hpp"
 #include "inst.hpp"
 
-void CPU::Execute( u32 Cycles )
+s32 CPU::Execute( u32 Cycles )
   {
     while (Cycles > 0)
     {
@@ -28,4 +28,5 @@ void CPU::Execute( u32 Cycles )
         } break;
       }
     }
+    return Cycles;
   }
