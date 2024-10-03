@@ -1,5 +1,6 @@
 #pragma once
 #include <cassert>
+#include <cstdio>
 
 using Byte = unsigned char;
 using Word = unsigned short;
@@ -60,10 +61,25 @@ struct CPU {
       return c ? (R & ~x) : R;
     }
 
-  Word addM(Byte a, Byte b, u32& Cycles)
+  static constexpr Byte
+    getH (Word Val)
+    {
+      return (Byte)(Val >> 8);
+    }
+    
+  static constexpr Byte
+    getL (Word Val)
+    {
+      return (Byte)(Val & 0x00FF);
+    }
+
+  Word addM(Word a, Word b, u32& Cycles, bool mode)
   {
     Cycles --;
-    return ((Word)a + (Word)b) & (Word)bitA;
+    if (mode)
+      return (a + b) & (Word)bitA;
+    else
+      return a + b;
   }
 
   void Reset() 
@@ -77,6 +93,20 @@ struct CPU {
     Y = clearR(1, Y, bitA);
     /* init memory */
     mem.init();
+  }
+
+  void Info()
+  {
+    printf("------------Reg-------------\n");
+    printf(" PC: 0x%X                   \n", PC);
+    printf(" A: 0x%X   X: 0x%X   Y: 0x%X   \n", A, X, Y);
+    printf(" SP: 0x%X      PS: 0x%X      \n", SP, PS);
+    printf("------------Mem-------------\n");
+    for (u32 i = 0; i < mem.MAX_MEM; ++ i) {
+      if (mem.Data[i])
+        printf("Addr: 0x%X\t  0x%X\n", i, mem.Data[i]);
+    }
+    printf("----------------------------\n");
   }
 
   Byte FetchByte( u32& Cycles )
@@ -106,13 +136,7 @@ struct CPU {
     return mem[-- SP];
   }
 
-  void SetPC(Word TargetAddr, u32& Cycles )
-  {
-    Cycles --;
-    PC = TargetAddr;
-  }
-
-  Byte ReadAddr( Byte Addr, u32& Cycles )
+  Byte ReadAddr( Word Addr, u32& Cycles )
   {
     Cycles --;
     return mem[(Word) Addr];

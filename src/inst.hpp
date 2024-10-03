@@ -437,3 +437,202 @@ class Inst {
         static void NOP(CPU& cpu, u32& Cycles);
         static void RTI(CPU& cpu, u32& Cycles);
 };
+
+struct InstCycles {
+    static constexpr u32
+        // LDA
+        LDA_IM = 2,
+        LDA_ZP = 3,
+        LDA_ZP_X = 4,
+        LDA_ABS = 4,
+        LDA_ABS_X = 4,
+        LDA_ABS_Y = 4,
+        LDA_IND_X = 6,
+        LDA_IND_Y = 5,
+
+        // LDX
+        LDX_IM = 2,
+        LDX_ZP = 3,
+        LDX_ZP_Y = 4,
+        LDX_ABS = 4,
+        LDX_ABS_Y = 4,
+
+        // LDY
+        LDY_IM = 2,
+        LDY_ZP = 3,
+        LDY_ZP_X = 4,
+        LDY_ABS = 4,
+        LDY_ABS_X = 4,
+
+        // STA
+        STA_ZP = 3,
+        STA_ZP_X = 4,
+        STA_ABS = 4,
+        STA_ABS_X = 5,
+        STA_ABS_Y = 5,
+        STA_IND_X = 6,
+        STA_IND_Y = 6,
+
+        // STX
+        STX_ZP = 3,
+        STX_ZP_Y = 4,
+        STX_ABS = 4,
+
+        // STY
+        STY_ZP = 3,
+        STY_ZP_X = 4,
+        STY_ABS = 4,
+
+        // Register Transfers
+        TAX = 2,
+        TAY = 2,
+        TXA = 2,
+        TYA = 2,
+
+        // Stack Operations
+        TSX = 2,
+        TXS = 2,
+        PHA = 3,
+        PHP = 3,
+        PLA = 4,
+        PLP = 4,
+
+        // Logical Operations
+        AND_IM = 2,
+        AND_ZP = 3,
+        AND_ZP_X = 4,
+        AND_ABS = 4,
+        AND_ABS_X = 4,
+        AND_ABS_Y = 4,
+        AND_IND_X = 6,
+        AND_IND_Y = 5,
+
+        EOR_IM = 2,
+        EOR_ZP = 3,
+        EOR_ZP_X = 4,
+        EOR_ABS = 4,
+        EOR_ABS_X = 4,
+        EOR_ABS_Y = 4,
+        EOR_IND_X = 6,
+        EOR_IND_Y = 5,
+
+        ORA_IM = 2,
+        ORA_ZP = 3,
+        ORA_ZP_X = 4,
+        ORA_ABS = 4,
+        ORA_ABS_X = 4,
+        ORA_ABS_Y = 4,
+        ORA_IND_X = 6,
+        ORA_IND_Y = 5,
+
+        BIT_ZP = 3,
+        BIT_ABS = 4,
+
+        // Arithmetic Operations
+        ADC_IM = 2,
+        ADC_ZP = 3,
+        ADC_ZP_X = 4,
+        ADC_ABS = 4,
+        ADC_ABS_X = 4,
+        ADC_ABS_Y = 4,
+        ADC_IND_X = 6,
+        ADC_IND_Y = 5,
+
+        SBC_IM = 2,
+        SBC_ZP = 3,
+        SBC_ZP_X = 4,
+        SBC_ABS = 4,
+        SBC_ABS_X = 4,
+        SBC_ABS_Y = 4,
+        SBC_IND_X = 6,
+        SBC_IND_Y = 5,
+
+        CMP_IM = 2,
+        CMP_ZP = 3,
+        CMP_ZP_X = 4,
+        CMP_ABS = 4,
+        CMP_ABS_X = 4,
+        CMP_ABS_Y = 4,
+        CMP_IND_X = 6,
+        CMP_IND_Y = 5,
+
+        CPX_IM = 2,
+        CPX_ZP = 3,
+        CPX_ABS = 4,
+
+        CPY_IM = 2,
+        CPY_ZP = 3,
+        CPY_ABS = 4,
+
+        // Increments & Decrements
+        INC_ZP = 5,
+        INC_ZP_X = 6,
+        INC_ABS = 6,
+        INC_ABS_X = 7,
+
+        INX = 2,
+        INY = 2,
+
+        DEC_ZP = 5,
+        DEC_ZP_X = 6,
+        DEC_ABS = 6,
+        DEC_ABS_X = 7,
+
+        DEX = 2,
+        DEY = 2,
+
+        // Shifts
+        ASL_ACC = 2,
+        ASL_ZP = 5,
+        ASL_ZP_X = 6,
+        ASL_ABS = 6,
+        ASL_ABS_X = 7,
+
+        LSR_ACC = 2,
+        LSR_ZP = 5,
+        LSR_ZP_X = 6,
+        LSR_ABS = 6,
+        LSR_ABS_X = 7,
+
+        ROL_ACC = 2,
+        ROL_ZP = 5,
+        ROL_ZP_X = 6,
+        ROL_ABS = 6,
+        ROL_ABS_X = 7,
+
+        ROR_ACC = 2,
+        ROR_ZP = 5,
+        ROR_ZP_X = 6,
+        ROR_ABS = 6,
+        ROR_ABS_X = 7,
+
+        // Jumps & Calls
+        JMP_ABS = 3,
+        JMP_IND = 5,
+        JSR_ABS = 6,
+        RTS = 6,
+
+        // Branches
+        BCC = 2,  // +1 if branch occurs, +2 if to different page
+        BCS = 2,  // +1 if branch occurs, +2 if to different page
+        BEQ = 2,  // +1 if branch occurs, +2 if to different page
+        BMI = 2,  // +1 if branch occurs, +2 if to different page
+        BNE = 2,  // +1 if branch occurs, +2 if to different page
+        BPL = 2,  // +1 if branch occurs, +2 if to different page
+        BVC = 2,  // +1 if branch occurs, +2 if to different page
+        BVS = 2,  // +1 if branch occurs, +2 if to different page
+
+        // Status Flag Changes
+        CLC = 2,
+        CLD = 2,
+        CLI = 2,
+        CLV = 2,
+        SEC = 2,
+        SED = 2,
+        SEI = 2,
+
+        // System Functions
+        BRK = 7,
+        NOP = 2,
+        RTI = 6;
+};
