@@ -1,9 +1,15 @@
 #pragma once
+#include <unordered_map>
+#include <functional>
 #include "cpu.hpp"
+
+using InstructionFunc = std::function<void(CPU&, u32&)>;
+using InstMap = std::unordered_map<Byte, InstructionFunc>;
+using cyclesMap = std::unordered_map<Byte, u32>;
 
 class Inst {
     private:
-
+        
     public:
         /* opcodes */
         // Load/Store Operations
@@ -441,203 +447,303 @@ class Inst {
         static void BRK(CPU& cpu, u32& Cycles);
         static void NOP(CPU& cpu, u32& Cycles);
         static void RTI(CPU& cpu, u32& Cycles);
+
+        InstMap imap = {
+            // Load/Store Operations (LDA, LDX, LDY, STA, STX, STY)
+            {0xA9, LDA_IM},   {0xA5, LDA_ZP},   {0xB5, LDA_ZP_X}, {0xAD, LDA_ABS},
+            {0xBD, LDA_ABS_X}, {0xB9, LDA_ABS_Y}, {0xA1, LDA_IND_X}, {0xB1, LDA_IND_Y},
+
+            {0xA2, LDX_IM},   {0xA6, LDX_ZP},   {0xB6, LDX_ZP_Y}, {0xAE, LDX_ABS},
+            {0xBE, LDX_ABS_Y},
+
+            {0xA0, LDY_IM},   {0xA4, LDY_ZP},   {0xB4, LDY_ZP_X}, {0xAC, LDY_ABS},
+            {0xBC, LDY_ABS_X},
+
+            {0x85, STA_ZP},   {0x95, STA_ZP_X}, {0x8D, STA_ABS},  {0x9D, STA_ABS_X},
+            {0x99, STA_ABS_Y}, {0x81, STA_IND_X}, {0x91, STA_IND_Y},
+
+            {0x86, STX_ZP},   {0x96, STX_ZP_Y}, {0x8E, STX_ABS},
+
+            {0x84, STY_ZP},   {0x94, STY_ZP_X}, {0x8C, STY_ABS},
+
+            // Register Transfers (TAX, TAY, TXA, TYA)
+            {0xAA, TAX}, {0xA8, TAY}, {0x8A, TXA}, {0x98, TYA},
+
+            // Stack Operations (TSX, TXS, PHA, PHP, PLA, PLP)
+            {0xBA, TSX}, {0x9A, TXS}, {0x48, PHA}, {0x08, PHP},
+            {0x68, PLA}, {0x28, PLP},
+
+            // Logical Operations (AND, EOR, ORA, BIT)
+            {0x29, AND_IM},   {0x25, AND_ZP},   {0x35, AND_ZP_X}, {0x2D, AND_ABS},
+            {0x3D, AND_ABS_X}, {0x39, AND_ABS_Y}, {0x21, AND_IND_X}, {0x31, AND_IND_Y},
+
+            {0x49, EOR_IM},   {0x45, EOR_ZP},   {0x55, EOR_ZP_X}, {0x4D, EOR_ABS},
+            {0x5D, EOR_ABS_X}, {0x59, EOR_ABS_Y}, {0x41, EOR_IND_X}, {0x51, EOR_IND_Y},
+
+            {0x09, ORA_IM},   {0x05, ORA_ZP},   {0x15, ORA_ZP_X}, {0x0D, ORA_ABS},
+            {0x1D, ORA_ABS_X}, {0x19, ORA_ABS_Y}, {0x01, ORA_IND_X}, {0x11, ORA_IND_Y},
+
+            {0x24, BIT_ZP},   {0x2C, BIT_ABS},
+
+            // Arithmetic Operations (ADC, SBC, CMP, CPX, CPY)
+            {0x69, ADC_IM},   {0x65, ADC_ZP},   {0x75, ADC_ZP_X}, {0x6D, ADC_ABS},
+            {0x7D, ADC_ABS_X}, {0x79, ADC_ABS_Y}, {0x61, ADC_IND_X}, {0x71, ADC_IND_Y},
+
+            {0xE9, SBC_IM},   {0xE5, SBC_ZP},   {0xF5, SBC_ZP_X}, {0xED, SBC_ABS},
+            {0xFD, SBC_ABS_X}, {0xF9, SBC_ABS_Y}, {0xE1, SBC_IND_X}, {0xF1, SBC_IND_Y},
+
+            {0xC9, CMP_IM},   {0xC5, CMP_ZP},   {0xD5, CMP_ZP_X}, {0xCD, CMP_ABS},
+            {0xDD, CMP_ABS_X}, {0xD9, CMP_ABS_Y}, {0xC1, CMP_IND_X}, {0xD1, CMP_IND_Y},
+
+            {0xE0, CPX_IM},   {0xE4, CPX_ZP},   {0xEC, CPX_ABS},
+
+            {0xC0, CPY_IM},   {0xC4, CPY_ZP},   {0xCC, CPY_ABS},
+
+            // Increments & Decrements (INC, INX, INY, DEC, DEX, DEY)
+            {0xE6, INC_ZP},   {0xF6, INC_ZP_X}, {0xEE, INC_ABS},  {0xFE, INC_ABS_X},
+
+            {0xE8, INX}, {0xC8, INY}, {0xCA, DEX}, {0x88, DEY},
+
+            {0xC6, DEC_ZP},   {0xD6, DEC_ZP_X}, {0xCE, DEC_ABS},  {0xDE, DEC_ABS_X},
+
+            // Shifts (ASL, LSR, ROL, ROR)
+            {0x0A, ASL_ABS},    {0x06, ASL_ZP},   {0x16, ASL_ZP_X}, {0x0E, ASL_ABS},
+            {0x1E, ASL_ABS_X},
+
+            {0x4A, LSR_ABS},    {0x46, LSR_ZP},   {0x56, LSR_ZP_X}, {0x4E, LSR_ABS},
+            {0x5E, LSR_ABS_X},
+
+            {0x2A, ROL_ABS},    {0x26, ROL_ZP},   {0x36, ROL_ZP_X}, {0x2E, ROL_ABS},
+            {0x3E, ROL_ABS_X},
+
+            {0x6A, ROR_ABS},    {0x66, ROR_ZP},   {0x76, ROR_ZP_X}, {0x6E, ROR_ABS},
+            {0x7E, ROR_ABS_X},
+
+            // Jumps & Calls (JMP, JSR, RTS)
+            {0x4C, JMP_ABS},  {0x6C, JMP_IND},  {0x20, JSR_ABS},      {0x60, RTS},
+
+            // Branches (BCC, BCS, BEQ, BMI, BNE, BPL, BVC, BVS)
+            {0x90, BCC}, {0xB0, BCS}, {0xF0, BEQ}, {0x30, BMI},
+            {0xD0, BNE}, {0x10, BPL}, {0x50, BVC}, {0x70, BVS},
+
+            // Status Flag Changes (CLC, CLD, CLI, CLV, SEC, SED, SEI)
+            {0x18, CLC}, {0xD8, CLD}, {0x58, CLI}, {0xB8, CLV},
+            {0x38, SEC}, {0xF8, SED}, {0x78, SEI},
+
+            // System Functions (BRK, NOP, RTI)
+            {0x00, BRK}, {0xEA, NOP}, {0x40, RTI}
+        };
+
+        InstructionFunc getInstFunc(Byte Inst)
+        {
+            return imap[Inst];
+        }
 };
 
 struct InstCycles {
-    static constexpr u32
+
+    cyclesMap cmap = {
         // LDA
-        LDA_IM = 2,
-        LDA_ZP = 3,
-        LDA_ZP_X = 4,
-        LDA_ABS = 4,
-        LDA_ABS_X = 4,
-        LDA_ABS_Y = 4,
-        LDA_IND_X = 6,
-        LDA_IND_Y = 5,
-
+        { Inst::INST_LDA_IM, 2 },
+        { Inst::INST_LDA_ZP, 3 },
+        { Inst::INST_LDA_ZP_X, 4 },
+        { Inst::INST_LDA_ABS, 4 },
+        { Inst::INST_LDA_ABS_X, 4 },
+        { Inst::INST_LDA_ABS_Y, 4 },
+        { Inst::INST_LDA_IND_X, 6 },
+        { Inst::INST_LDA_IND_Y, 5 },
+        
         // LDX
-        LDX_IM = 2,
-        LDX_ZP = 3,
-        LDX_ZP_Y = 4,
-        LDX_ABS = 4,
-        LDX_ABS_Y = 4,
-
+        { Inst::INST_LDX_IM, 2 },
+        { Inst::INST_LDX_ZP, 3 },
+        { Inst::INST_LDX_ZP_Y, 4 },
+        { Inst::INST_LDX_ABS, 4 },
+        { Inst::INST_LDX_ABS_Y, 4 },
+        
         // LDY
-        LDY_IM = 2,
-        LDY_ZP = 3,
-        LDY_ZP_X = 4,
-        LDY_ABS = 4,
-        LDY_ABS_X = 4,
-
+        { Inst::INST_LDY_IM, 2 },
+        { Inst::INST_LDY_ZP, 3 },
+        { Inst::INST_LDY_ZP_X, 4 },
+        { Inst::INST_LDY_ABS, 4 },
+        { Inst::INST_LDY_ABS_X, 4 },
+        
         // STA
-        STA_ZP = 3,
-        STA_ZP_X = 4,
-        STA_ABS = 4,
-        STA_ABS_X = 5,
-        STA_ABS_Y = 5,
-        STA_IND_X = 6,
-        STA_IND_Y = 6,
-
+        { Inst::INST_STA_ZP, 3 },
+        { Inst::INST_STA_ZP_X, 4 },
+        { Inst::INST_STA_ABS, 4 },
+        { Inst::INST_STA_ABS_X, 5 },
+        { Inst::INST_STA_ABS_Y, 5 },
+        { Inst::INST_STA_IND_X, 6 },
+        { Inst::INST_STA_IND_Y, 6 },
+        
         // STX
-        STX_ZP = 3,
-        STX_ZP_Y = 4,
-        STX_ABS = 4,
-
+        { Inst::INST_STX_ZP, 3 },
+        { Inst::INST_STX_ZP_Y, 4 },
+        { Inst::INST_STX_ABS, 4 },
+        
         // STY
-        STY_ZP = 3,
-        STY_ZP_X = 4,
-        STY_ABS = 4,
-
+        { Inst::INST_STY_ZP, 3 },
+        { Inst::INST_STY_ZP_X, 4 },
+        { Inst::INST_STY_ABS, 4 },
+        
         // Register Transfers
-        TAX = 2,
-        TAY = 2,
-        TXA = 2,
-        TYA = 2,
-
+        { Inst::INST_TAX, 2 },
+        { Inst::INST_TAY, 2 },
+        { Inst::INST_TXA, 2 },
+        { Inst::INST_TYA, 2 },
+        { Inst::INST_TSX, 2 },
+        { Inst::INST_TXS, 2 },
+        
         // Stack Operations
-        TSX = 2,
-        TXS = 2,
-        PHA = 3,
-        PHP = 3,
-        PLA = 4,
-        PLP = 4,
-
+        { Inst::INST_PHA, 3 },
+        { Inst::INST_PHP, 3 },
+        { Inst::INST_PLA, 4 },
+        { Inst::INST_PLP, 4 },
+        
         // Logical Operations
-        AND_IM = 2,
-        AND_ZP = 3,
-        AND_ZP_X = 4,
-        AND_ABS = 4,
-        AND_ABS_X = 4,
-        AND_ABS_Y = 4,
-        AND_IND_X = 6,
-        AND_IND_Y = 5,
-
-        EOR_IM = 2,
-        EOR_ZP = 3,
-        EOR_ZP_X = 4,
-        EOR_ABS = 4,
-        EOR_ABS_X = 4,
-        EOR_ABS_Y = 4,
-        EOR_IND_X = 6,
-        EOR_IND_Y = 5,
-
-        ORA_IM = 2,
-        ORA_ZP = 3,
-        ORA_ZP_X = 4,
-        ORA_ABS = 4,
-        ORA_ABS_X = 4,
-        ORA_ABS_Y = 4,
-        ORA_IND_X = 6,
-        ORA_IND_Y = 5,
-
-        BIT_ZP = 3,
-        BIT_ABS = 4,
-
+        // AND
+        { Inst::INST_AND_IM, 2 },
+        { Inst::INST_AND_ZP, 3 },
+        { Inst::INST_AND_ZP_X, 4 },
+        { Inst::INST_AND_ABS, 4 },
+        { Inst::INST_AND_ABS_X, 4 },
+        { Inst::INST_AND_ABS_Y, 4 },
+        { Inst::INST_AND_IND_X, 6 },
+        { Inst::INST_AND_IND_Y, 5 },
+        
+        // EOR
+        { Inst::INST_EOR_IM, 2 },
+        { Inst::INST_EOR_ZP, 3 },
+        { Inst::INST_EOR_ZP_X, 4 },
+        { Inst::INST_EOR_ABS, 4 },
+        { Inst::INST_EOR_ABS_X, 4 },
+        { Inst::INST_EOR_ABS_Y, 4 },
+        { Inst::INST_EOR_IND_X, 6 },
+        { Inst::INST_EOR_IND_Y, 5 },
+        
+        // ORA
+        { Inst::INST_ORA_IM, 2 },
+        { Inst::INST_ORA_ZP, 3 },
+        { Inst::INST_ORA_ZP_X, 4 },
+        { Inst::INST_ORA_ABS, 4 },
+        { Inst::INST_ORA_ABS_X, 4 },
+        { Inst::INST_ORA_ABS_Y, 4 },
+        { Inst::INST_ORA_IND_X, 6 },
+        { Inst::INST_ORA_IND_Y, 5 },
+        
+        // BIT
+        { Inst::INST_BIT_ZP, 3 },
+        { Inst::INST_BIT_ABS, 4 },
+        
         // Arithmetic Operations
-        ADC_IM = 2,
-        ADC_ZP = 3,
-        ADC_ZP_X = 4,
-        ADC_ABS = 4,
-        ADC_ABS_X = 4,
-        ADC_ABS_Y = 4,
-        ADC_IND_X = 6,
-        ADC_IND_Y = 5,
-
-        SBC_IM = 2,
-        SBC_ZP = 3,
-        SBC_ZP_X = 4,
-        SBC_ABS = 4,
-        SBC_ABS_X = 4,
-        SBC_ABS_Y = 4,
-        SBC_IND_X = 6,
-        SBC_IND_Y = 5,
-
-        CMP_IM = 2,
-        CMP_ZP = 3,
-        CMP_ZP_X = 4,
-        CMP_ABS = 4,
-        CMP_ABS_X = 4,
-        CMP_ABS_Y = 4,
-        CMP_IND_X = 6,
-        CMP_IND_Y = 5,
-
-        CPX_IM = 2,
-        CPX_ZP = 3,
-        CPX_ABS = 4,
-
-        CPY_IM = 2,
-        CPY_ZP = 3,
-        CPY_ABS = 4,
-
+        // ADC
+        { Inst::INST_ADC_IM, 2 },
+        { Inst::INST_ADC_ZP, 3 },
+        { Inst::INST_ADC_ZP_X, 4 },
+        { Inst::INST_ADC_ABS, 4 },
+        { Inst::INST_ADC_ABS_X, 4 },
+        { Inst::INST_ADC_ABS_Y, 4 },
+        { Inst::INST_ADC_IND_X, 6 },
+        { Inst::INST_ADC_IND_Y, 5 },
+        
+        // SBC
+        { Inst::INST_SBC_IM, 2 },
+        { Inst::INST_SBC_ZP, 3 },
+        { Inst::INST_SBC_ZP_X, 4 },
+        { Inst::INST_SBC_ABS, 4 },
+        { Inst::INST_SBC_ABS_X, 4 },
+        { Inst::INST_SBC_ABS_Y, 4 },
+        { Inst::INST_SBC_IND_X, 6 },
+        { Inst::INST_SBC_IND_Y, 5 },
+        
+        // CMP
+        { Inst::INST_CMP_IM, 2 },
+        { Inst::INST_CMP_ZP, 3 },
+        { Inst::INST_CMP_ZP_X, 4 },
+        { Inst::INST_CMP_ABS, 4 },
+        { Inst::INST_CMP_ABS_X, 4 },
+        { Inst::INST_CMP_ABS_Y, 4 },
+        { Inst::INST_CMP_IND_X, 6 },
+        { Inst::INST_CMP_IND_Y, 5 },
+        
+        // CPX
+        { Inst::INST_CPX_IM, 2 },
+        { Inst::INST_CPX_ZP, 3 },
+        { Inst::INST_CPX_ABS, 4 },
+        
+        // CPY
+        { Inst::INST_CPY_IM, 2 },
+        { Inst::INST_CPY_ZP, 3 },
+        { Inst::INST_CPY_ABS, 4 },
+        
         // Increments & Decrements
-        INC_ZP = 5,
-        INC_ZP_X = 6,
-        INC_ABS = 6,
-        INC_ABS_X = 7,
-
-        INX = 2,
-        INY = 2,
-
-        DEC_ZP = 5,
-        DEC_ZP_X = 6,
-        DEC_ABS = 6,
-        DEC_ABS_X = 7,
-
-        DEX = 2,
-        DEY = 2,
-
+        { Inst::INST_INC_ZP, 5 },
+        { Inst::INST_INC_ZP_X, 6 },
+        { Inst::INST_INC_ABS, 6 },
+        { Inst::INST_INC_ABS_X, 7 },
+        { Inst::INST_INX, 2 },
+        { Inst::INST_INY, 2 },
+        { Inst::INST_DEC_ZP, 5 },
+        { Inst::INST_DEC_ZP_X, 6 },
+        { Inst::INST_DEC_ABS, 6 },
+        { Inst::INST_DEC_ABS_X, 7 },
+        { Inst::INST_DEX, 2 },
+        { Inst::INST_DEY, 2 },
+        
         // Shifts
-        ASL_ACC = 2,
-        ASL_ZP = 5,
-        ASL_ZP_X = 6,
-        ASL_ABS = 6,
-        ASL_ABS_X = 7,
-
-        LSR_ACC = 2,
-        LSR_ZP = 5,
-        LSR_ZP_X = 6,
-        LSR_ABS = 6,
-        LSR_ABS_X = 7,
-
-        ROL_ACC = 2,
-        ROL_ZP = 5,
-        ROL_ZP_X = 6,
-        ROL_ABS = 6,
-        ROL_ABS_X = 7,
-
-        ROR_ACC = 2,
-        ROR_ZP = 5,
-        ROR_ZP_X = 6,
-        ROR_ABS = 6,
-        ROR_ABS_X = 7,
-
+        { Inst::INST_ASL_ACC, 2 },
+        { Inst::INST_ASL_ZP, 5 },
+        { Inst::INST_ASL_ZP_X, 6 },
+        { Inst::INST_ASL_ABS, 6 },
+        { Inst::INST_ASL_ABS_X, 7 },
+        { Inst::INST_LSR_ACC, 2 },
+        { Inst::INST_LSR_ZP, 5 },
+        { Inst::INST_LSR_ZP_X, 6 },
+        { Inst::INST_LSR_ABS, 6 },
+        { Inst::INST_LSR_ABS_X, 7 },
+        { Inst::INST_ROL_ACC, 2 },
+        { Inst::INST_ROL_ZP, 5 },
+        { Inst::INST_ROL_ZP_X, 6 },
+        { Inst::INST_ROL_ABS, 6 },
+        { Inst::INST_ROL_ABS_X, 7 },
+        { Inst::INST_ROR_ACC, 2 },
+        { Inst::INST_ROR_ZP, 5 },
+        { Inst::INST_ROR_ZP_X, 6 },
+        { Inst::INST_ROR_ABS, 6 },
+        { Inst::INST_ROR_ABS_X, 7 },
+        
         // Jumps & Calls
-        JMP_ABS = 3,
-        JMP_IND = 5,
-        JSR_ABS = 6,
-        RTS = 6,
-
+        { Inst::INST_JMP_ABS, 3 },
+        { Inst::INST_JMP_IND, 5 },
+        { Inst::INST_JSR_ABS, 6 },
+        { Inst::INST_RTS, 6 },
+        
         // Branches
-        BCC = 2,  // +1 if branch occurs, +2 if to different page
-        BCS = 2,  // +1 if branch occurs, +2 if to different page
-        BEQ = 2,  // +1 if branch occurs, +2 if to different page
-        BMI = 2,  // +1 if branch occurs, +2 if to different page
-        BNE = 2,  // +1 if branch occurs, +2 if to different page
-        BPL = 2,  // +1 if branch occurs, +2 if to different page
-        BVC = 2,  // +1 if branch occurs, +2 if to different page
-        BVS = 2,  // +1 if branch occurs, +2 if to different page
-
+        { Inst::INST_BCC, 2 },  // +1 if branch occurs, +2 if to different page
+        { Inst::INST_BCS, 2 },  // +1 if branch occurs, +2 if to different page
+        { Inst::INST_BEQ, 2 },  // +1 if branch occurs, +2 if to different page
+        { Inst::INST_BMI, 2 },  // +1 if branch occurs, +2 if to different page
+        { Inst::INST_BNE, 2 },  // +1 if branch occurs, +2 if to different page
+        { Inst::INST_BPL, 2 },  // +1 if branch occurs, +2 if to different page
+        { Inst::INST_BVC, 2 },  // +1 if branch occurs, +2 if to different page
+        { Inst::INST_BVS, 2 },  // +1 if branch occurs, +2 if to different page
+        
         // Status Flag Changes
-        CLC = 2,
-        CLD = 2,
-        CLI = 2,
-        CLV = 2,
-        SEC = 2,
-        SED = 2,
-        SEI = 2,
-
+        { Inst::INST_CLC, 2 },
+        { Inst::INST_CLD, 2 },
+        { Inst::INST_CLI, 2 },
+        { Inst::INST_CLV, 2 },
+        { Inst::INST_SEC, 2 },
+        { Inst::INST_SED, 2 },
+        { Inst::INST_SEI, 2 },
+        
         // System Functions
-        BRK = 7,
-        NOP = 2,
-        RTI = 6;
+        { Inst::INST_BRK, 7 },
+        { Inst::INST_NOP, 2 },
+        { Inst::INST_RTI, 6 },
+    };
+
+    u32 getCycles(Byte Inst) {
+        return cmap[Inst];
+    }
 };

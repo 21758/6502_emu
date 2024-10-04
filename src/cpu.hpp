@@ -2,6 +2,8 @@
 #include <cassert>
 #include <cstdio>
 
+#define INST_TO_CYCLES(inst) InstCycles::inst
+
 using Byte = unsigned char;
 using Word = unsigned short;
 using u32 = unsigned int;
@@ -115,6 +117,11 @@ struct CPU {
     return mem[PC ++];
   }
 
+  Byte CheckInst()
+  {
+    return mem[PC];
+  }
+
   Word FetchWord( u32& Cycles )
   {
     Cycles -= 2;
@@ -142,6 +149,6 @@ struct CPU {
     return mem[(Word) Addr];
   }
 
-  s32 Execute( u32 Cycles );
+  u32 ExecuteOnce();
 };
 
