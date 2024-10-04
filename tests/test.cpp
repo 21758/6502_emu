@@ -98,7 +98,22 @@ protected:
         RegTest(Rd, 0x55);
         RegTest(Rs, 0x11);
         PCTest(0xFFFF);
-        cpu.Info();
+        PSTest(0);
+        cpu.Reset();
+    }
+
+    void LDA_IND_R_TEST(const Byte Inst, const u32 Cycles, Byte& R) {
+        R = 0x55;
+        cpu.mem[0xFFFC] = Inst;
+        cpu.mem[0xFFFD] = 0x10;
+        cpu.mem[0x0065] = 0x12;
+        cpu.mem[0x0066] = 0x34;
+        cpu.mem[0x1234] = 0x55;
+
+        CPURun(Cycles);
+        
+        RegTest(cpu.A, 0x55);
+        PCTest(0xFFFE);
         PSTest(0);
         cpu.Reset();
     }
@@ -110,6 +125,8 @@ TEST_F(M6502Test, INST_LDA_DIRECT_TEST) {
     LD_ZP_R_TSET(Inst::INST_LDA_ZP_X, InstCycles::LDA_ZP_X, cpu.X, cpu.A);
     LD_ABS_TSET(Inst::INST_LDA_ABS, InstCycles::LDA_ABS, cpu.A);
     LD_ABS_R_TEST(Inst::INST_LDA_ABS_X, InstCycles::LDA_ABS_X + 1, cpu.X, cpu.A);
+    LDA_IND_R_TEST(Inst::INST_LDA_IND_X, InstCycles::LDA_IND_X, cpu.X);
+    LDA_IND_R_TEST(Inst::INST_LDA_IND_Y, InstCycles::LDA_IND_Y + 1, cpu.Y);
 }
 
 TEST_F(M6502Test, INST_JMP_ABS) {

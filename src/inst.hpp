@@ -237,7 +237,6 @@ class Inst {
         static void LDA_IND_Y(CPU& cpu, u32& Cycles);
 
         // LDX
-        static void LDXSetStatus(CPU& cpu);
         static void LDX_IM(CPU& cpu, u32& Cycles);
         static void LDX_ZP(CPU& cpu, u32& Cycles);
         static void LDX_ZP_Y(CPU& cpu, u32& Cycles);
@@ -245,7 +244,6 @@ class Inst {
         static void LDX_ABS_Y(CPU& cpu, u32& Cycles);
         
         // LDY
-        static void LDYSetStatus(CPU& cpu);
         static void LDY_IM(CPU& cpu, u32& Cycles);
         static void LDY_ZP(CPU& cpu, u32& Cycles);
         static void LDY_ZP_X(CPU& cpu, u32& Cycles);
