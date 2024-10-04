@@ -218,8 +218,15 @@ class Inst {
             INST_RTI = 0x40;
         
         /* functions */
+        // LD
+        static void LDSetStatus(CPU& cpu, Byte& R);
+        static void LD_IM(CPU& cpu, u32& Cycles, Byte& R);
+        static void LD_ZP(CPU& cpu, u32& Cycles, Byte& R);
+        static void LD_ZP_R(CPU& cpu, u32& Cycles, Byte& Rd, Byte& Rs);
+        static void LD_ABS(CPU& cpu, u32& Cycles, Byte& R);
+        static void LD_ABS_R(CPU& cpu, u32& Cycles, Byte& Rd, Byte& Rs);
+
         // LDA
-        static void LDASetStatus(CPU& cpu);
         static void LDA_IM(CPU& cpu, u32& Cycles);
         static void LDA_ZP(CPU& cpu, u32& Cycles);
         static void LDA_ZP_X(CPU& cpu, u32& Cycles);

@@ -25,65 +25,91 @@ protected:
         EXPECT_EQ(cpu.PC, PC) << "Program counter incorrect";
     }
 
-    void RegTest(Byte expectedA, Byte expectedX, Byte expectedY) {
-        EXPECT_EQ(cpu.A, expectedA) << "Accumulator mismatch";
-        EXPECT_EQ(cpu.X, expectedX) << "X register mismatch";
-        EXPECT_EQ(cpu.Y, expectedY) << "Y register mismatch";
+    void RegTest(Byte& R, const Byte expectedR) {
+        EXPECT_EQ(R, expectedR) << "Reg mismatch";
     }
 
     void PSTest(Byte expectedStatus) {
         EXPECT_EQ(cpu.PS, expectedStatus) << "Processor status mismatch";
     }
+
+    void LD_IM_TEST(const Byte Inst, const u32 Cycles, Byte& R) {
+        cpu.mem[0xFFFC] = Inst;
+        cpu.mem[0xFFFD] = 0xF5;
+
+        CPURun(Cycles);
+
+        RegTest(R, 0xF5);
+        PCTest(0xFFFE);
+        PSTest(CPU::PS_N);
+        cpu.Reset();
+    }
+
+    void LD_ZP_TSET(const Byte Inst, const u32 Cycles, Byte& R) {
+        cpu.mem[0xFFFC] = Inst;
+        cpu.mem[0xFFFD] = 0x12;
+        cpu.mem[0x0012] = 0x55;
+
+        CPURun(Cycles);
+
+        RegTest(R, 0x55);
+        PCTest(0xFFFE);
+        PSTest(0);
+        cpu.Reset();
+    }
+
+    void LD_ZP_R_TSET(const Byte Inst, const u32 Cycles, Byte& Rs, Byte& Rd) {
+        Rs = 0x43;
+        cpu.mem[0xFFFC] = Inst;
+        cpu.mem[0xFFFD] = 0x12;
+        cpu.mem[0x0055] = 0xF5;
+
+        CPURun(Cycles);
+
+        RegTest(Rd, 0xF5);
+        PCTest(0xFFFE);
+        PSTest(CPU::PS_N);
+        cpu.Reset();
+    }
+
+    void LD_ABS_TSET(const Byte Inst, const u32 Cycles, Byte& R) {
+        cpu.mem[0xFFFC] = Inst;
+        cpu.mem[0xFFFD] = 0x12;
+        cpu.mem[0xFFFE] = 0x34;
+        cpu.mem[0x1234] = 0x55;
+
+        CPURun(Cycles);
+
+        RegTest(R, 0x55);
+        PCTest(0xFFFF);
+        PSTest(0);
+        cpu.Reset();
+    }
+
+    void LD_ABS_R_TEST(const Byte Inst, const u32 Cycles, Byte& Rs, Byte& Rd) {
+        Rs = 0x11;
+        cpu.mem[0xFFFC] = Inst;
+        cpu.mem[0xFFFD] = 0x12;
+        cpu.mem[0xFFFE] = 0x34;
+        cpu.mem[0x1245] = 0x55;
+
+        CPURun(Cycles);
+
+        RegTest(Rd, 0x55);
+        RegTest(Rs, 0x11);
+        PCTest(0xFFFF);
+        cpu.Info();
+        PSTest(0);
+        cpu.Reset();
+    }
 };
 
-TEST_F(M6502Test, INST_LDA_IM) {
-    cpu.mem[0xFFFC] = Inst::INST_LDA_IM;
-    cpu.mem[0xFFFD] = 0xF2;
-
-    CPURun(InstCycles::LDA_IM);
-
-    RegTest(0xF2, 0, 0);
-    PCTest(0xFFFE);
-    PSTest(CPU::PS_N);
-}
-
-TEST_F(M6502Test, INST_LDA_ZP) {
-    cpu.mem[0xFFFC] = Inst::INST_LDA_ZP;
-    cpu.mem[0xFFFD] = 0x12;
-    cpu.mem[0x0012] = 0x34;
-
-    CPURun(InstCycles::LDA_ZP);
-
-    RegTest(0x34, 0, 0);
-    PCTest(0xFFFE);
-    PSTest(0);
-}
-
-TEST_F(M6502Test, INST_LDA_ABS) {
-    cpu.mem[0xFFFC] = Inst::INST_LDA_ABS;
-    cpu.mem[0xFFFD] = 0x12;
-    cpu.mem[0xFFFE] = 0x34;
-    cpu.mem[0x1234] = 0x34;
-
-    CPURun(InstCycles::LDA_ABS);
-
-    RegTest(0x34, 0, 0);
-    PCTest(0xFFFF);
-    PSTest(0);
-}
-
-TEST_F(M6502Test, INST_LDA_ABS_X) {
-    cpu.X = 0x11;
-    cpu.mem[0xFFFC] = Inst::INST_LDA_ABS_X;
-    cpu.mem[0xFFFD] = 0x12;
-    cpu.mem[0xFFFE] = 0x34;
-    cpu.mem[0x1245] = 0x34;
-
-    CPURun(InstCycles::LDA_ABS_X + 1);
-
-    RegTest(0x34, 0x11, 0);
-    PCTest(0xFFFF);
-    PSTest(0);
+TEST_F(M6502Test, INST_LDA_DIRECT_TEST) {
+    LD_IM_TEST(Inst::INST_LDA_IM, InstCycles::LDA_IM, cpu.A);
+    LD_ZP_TSET(Inst::INST_LDA_ZP, InstCycles::LDA_ZP, cpu.A);
+    LD_ZP_R_TSET(Inst::INST_LDA_ZP_X, InstCycles::LDA_ZP_X, cpu.X, cpu.A);
+    LD_ABS_TSET(Inst::INST_LDA_ABS, InstCycles::LDA_ABS, cpu.A);
+    LD_ABS_R_TEST(Inst::INST_LDA_ABS_X, InstCycles::LDA_ABS_X + 1, cpu.X, cpu.A);
 }
 
 TEST_F(M6502Test, INST_JMP_ABS) {
@@ -93,7 +119,6 @@ TEST_F(M6502Test, INST_JMP_ABS) {
 
     CPURun(InstCycles::JMP_ABS);
 
-    RegTest(0, 0, 0);
     PCTest(0x1000);
     PSTest(0);
 }
@@ -107,7 +132,6 @@ TEST_F(M6502Test, INST_JMP_IND) {
 
     CPURun(InstCycles::JMP_IND);
 
-    RegTest(0, 0, 0);
     PCTest(0x2000);
     PSTest(0);
 }
@@ -120,7 +144,6 @@ TEST_F(M6502Test, INST_JSR_ABS) {
     CPUJmp(0x1000);
     CPURun(InstCycles::JSR_ABS);
 
-    RegTest(0, 0, 0);
     PCTest(0x2000);
     EXPECT_EQ(cpu.SP, 0x0102);
     EXPECT_EQ(cpu.mem[0x0100], 0x03);
@@ -145,7 +168,7 @@ TEST_F(M6502Test, CallFunctionAndReturn) {
 
     CPURun(Cycles);
 
-    RegTest(0x34, 0, 0);
+    RegTest(cpu.A, 0x34);
     PCTest(0xff05);
     PSTest(0);
 }
