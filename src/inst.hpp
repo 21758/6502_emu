@@ -242,39 +242,45 @@ class Inst {
         static void LDA_IND_X(CPU& cpu, u32& Cycles);
         static void LDA_IND_Y(CPU& cpu, u32& Cycles);
 
-        // // LDX
-        // static void LDX_IM(CPU& cpu, u32& Cycles);
-        // static void LDX_ZP(CPU& cpu, u32& Cycles);
-        // static void LDX_ZP_Y(CPU& cpu, u32& Cycles);
-        // static void LDX_ABS(CPU& cpu, u32& Cycles);
-        // static void LDX_ABS_Y(CPU& cpu, u32& Cycles);
+        // LDX
+        static void LDX_IM(CPU& cpu, u32& Cycles);
+        static void LDX_ZP(CPU& cpu, u32& Cycles);
+        static void LDX_ZP_Y(CPU& cpu, u32& Cycles);
+        static void LDX_ABS(CPU& cpu, u32& Cycles);
+        static void LDX_ABS_Y(CPU& cpu, u32& Cycles);
         
-        // // LDY
-        // static void LDY_IM(CPU& cpu, u32& Cycles);
-        // static void LDY_ZP(CPU& cpu, u32& Cycles);
-        // static void LDY_ZP_X(CPU& cpu, u32& Cycles);
-        // static void LDY_ABS(CPU& cpu, u32& Cycles);
-        // static void LDY_ABS_X(CPU& cpu, u32& Cycles);
+        // LDY
+        static void LDY_IM(CPU& cpu, u32& Cycles);
+        static void LDY_ZP(CPU& cpu, u32& Cycles);
+        static void LDY_ZP_X(CPU& cpu, u32& Cycles);
+        static void LDY_ABS(CPU& cpu, u32& Cycles);
+        static void LDY_ABS_X(CPU& cpu, u32& Cycles);
 
-        // // Store Operations
-        // // STA
-        // static void STA_ZP(CPU& cpu, u32& Cycles);
-        // static void STA_ZP_X(CPU& cpu, u32& Cycles);
-        // static void STA_ABS(CPU& cpu, u32& Cycles);
-        // static void STA_ABS_X(CPU& cpu, u32& Cycles);
-        // static void STA_ABS_Y(CPU& cpu, u32& Cycles);
-        // static void STA_IND_X(CPU& cpu, u32& Cycles);
-        // static void STA_IND_Y(CPU& cpu, u32& Cycles);
+        // Store Operations
+        // ST
+        static void ST_ZP(CPU& cpu, u32& Cycles, Byte& R);
+        static void ST_ZP_R(CPU& cpu, u32& Cycles, Byte& Rd, Byte& Rs);
+        static void ST_ABS(CPU& cpu, u32& Cycles, Byte& R);
+        static void ST_ABS_R(CPU& cpu, u32& Cycles, Byte& Rd, Byte& Rs);
+        static void ST_IND_R(CPU& cpu, u32& Cycles, Byte& Rd, Byte& Rs);
+        // STA
+        static void STA_ZP(CPU& cpu, u32& Cycles);
+        static void STA_ZP_X(CPU& cpu, u32& Cycles);
+        static void STA_ABS(CPU& cpu, u32& Cycles);
+        static void STA_ABS_X(CPU& cpu, u32& Cycles);
+        static void STA_ABS_Y(CPU& cpu, u32& Cycles);
+        static void STA_IND_X(CPU& cpu, u32& Cycles);
+        static void STA_IND_Y(CPU& cpu, u32& Cycles);
         
-        // // STX
-        // static void STX_ZP(CPU& cpu, u32& Cycles);
-        // static void STX_ZP_Y(CPU& cpu, u32& Cycles);
-        // static void STX_ABS(CPU& cpu, u32& Cycles);
+        // STX
+        static void STX_ZP(CPU& cpu, u32& Cycles);
+        static void STX_ZP_Y(CPU& cpu, u32& Cycles);
+        static void STX_ABS(CPU& cpu, u32& Cycles);
         
-        // // STY
-        // static void STY_ZP(CPU& cpu, u32& Cycles);
-        // static void STY_ZP_X(CPU& cpu, u32& Cycles);
-        // static void STY_ABS(CPU& cpu, u32& Cycles);
+        // STY
+        static void STY_ZP(CPU& cpu, u32& Cycles);
+        static void STY_ZP_X(CPU& cpu, u32& Cycles);
+        static void STY_ABS(CPU& cpu, u32& Cycles);
 
         // // Register Transfers
         // static void TAX(CPU& cpu, u32& Cycles);
@@ -453,18 +459,18 @@ class Inst {
             {0xA9, LDA_IM},   {0xA5, LDA_ZP},   {0xB5, LDA_ZP_X}, {0xAD, LDA_ABS},
             {0xBD, LDA_ABS_X}, {0xB9, LDA_ABS_Y}, {0xA1, LDA_IND_X}, {0xB1, LDA_IND_Y},
 
-            // {0xA2, LDX_IM},   {0xA6, LDX_ZP},   {0xB6, LDX_ZP_Y}, {0xAE, LDX_ABS},
-            // {0xBE, LDX_ABS_Y},
+            {0xA2, LDX_IM},   {0xA6, LDX_ZP},   {0xB6, LDX_ZP_Y}, {0xAE, LDX_ABS},
+            {0xBE, LDX_ABS_Y},
 
-            // {0xA0, LDY_IM},   {0xA4, LDY_ZP},   {0xB4, LDY_ZP_X}, {0xAC, LDY_ABS},
-            // {0xBC, LDY_ABS_X},
+            {0xA0, LDY_IM},   {0xA4, LDY_ZP},   {0xB4, LDY_ZP_X}, {0xAC, LDY_ABS},
+            {0xBC, LDY_ABS_X},
 
-            // {0x85, STA_ZP},   {0x95, STA_ZP_X}, {0x8D, STA_ABS},  {0x9D, STA_ABS_X},
-            // {0x99, STA_ABS_Y}, {0x81, STA_IND_X}, {0x91, STA_IND_Y},
+            {0x85, STA_ZP},   {0x95, STA_ZP_X}, {0x8D, STA_ABS},  {0x9D, STA_ABS_X},
+            {0x99, STA_ABS_Y}, {0x81, STA_IND_X}, {0x91, STA_IND_Y},
 
-            // {0x86, STX_ZP},   {0x96, STX_ZP_Y}, {0x8E, STX_ABS},
+            {0x86, STX_ZP},   {0x96, STX_ZP_Y}, {0x8E, STX_ABS},
 
-            // {0x84, STY_ZP},   {0x94, STY_ZP_X}, {0x8C, STY_ABS},
+            {0x84, STY_ZP},   {0x94, STY_ZP_X}, {0x8C, STY_ABS},
 
             // // Register Transfers (TAX, TAY, TXA, TYA)
             // {0xAA, TAX}, {0xA8, TAY}, {0x8A, TXA}, {0x98, TYA},
