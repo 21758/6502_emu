@@ -117,7 +117,7 @@ struct CPU {
     return mem[PC ++];
   }
 
-  Byte CheckInst()
+  Byte FetchInst()
   {
     return mem[PC];
   }
@@ -150,5 +150,7 @@ struct CPU {
   }
 
   u32 ExecuteOnce();
+
+  u32 Execute();
 };
 

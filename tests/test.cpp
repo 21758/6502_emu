@@ -18,7 +18,7 @@ protected:
     }
 
     void CPURun() {
-        EXPECT_EQ(cpu.ExecuteOnce(), 0);
+        EXPECT_EQ(cpu.Execute(), 0);
     }
 
     void PCTest(Word PC) {

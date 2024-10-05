@@ -242,180 +242,180 @@ class Inst {
         static void LDA_IND_X(CPU& cpu, u32& Cycles);
         static void LDA_IND_Y(CPU& cpu, u32& Cycles);
 
-        // LDX
-        static void LDX_IM(CPU& cpu, u32& Cycles);
-        static void LDX_ZP(CPU& cpu, u32& Cycles);
-        static void LDX_ZP_Y(CPU& cpu, u32& Cycles);
-        static void LDX_ABS(CPU& cpu, u32& Cycles);
-        static void LDX_ABS_Y(CPU& cpu, u32& Cycles);
+        // // LDX
+        // static void LDX_IM(CPU& cpu, u32& Cycles);
+        // static void LDX_ZP(CPU& cpu, u32& Cycles);
+        // static void LDX_ZP_Y(CPU& cpu, u32& Cycles);
+        // static void LDX_ABS(CPU& cpu, u32& Cycles);
+        // static void LDX_ABS_Y(CPU& cpu, u32& Cycles);
         
-        // LDY
-        static void LDY_IM(CPU& cpu, u32& Cycles);
-        static void LDY_ZP(CPU& cpu, u32& Cycles);
-        static void LDY_ZP_X(CPU& cpu, u32& Cycles);
-        static void LDY_ABS(CPU& cpu, u32& Cycles);
-        static void LDY_ABS_X(CPU& cpu, u32& Cycles);
+        // // LDY
+        // static void LDY_IM(CPU& cpu, u32& Cycles);
+        // static void LDY_ZP(CPU& cpu, u32& Cycles);
+        // static void LDY_ZP_X(CPU& cpu, u32& Cycles);
+        // static void LDY_ABS(CPU& cpu, u32& Cycles);
+        // static void LDY_ABS_X(CPU& cpu, u32& Cycles);
 
-        // Store Operations
-        // STA
-        static void STA_ZP(CPU& cpu, u32& Cycles);
-        static void STA_ZP_X(CPU& cpu, u32& Cycles);
-        static void STA_ABS(CPU& cpu, u32& Cycles);
-        static void STA_ABS_X(CPU& cpu, u32& Cycles);
-        static void STA_ABS_Y(CPU& cpu, u32& Cycles);
-        static void STA_IND_X(CPU& cpu, u32& Cycles);
-        static void STA_IND_Y(CPU& cpu, u32& Cycles);
+        // // Store Operations
+        // // STA
+        // static void STA_ZP(CPU& cpu, u32& Cycles);
+        // static void STA_ZP_X(CPU& cpu, u32& Cycles);
+        // static void STA_ABS(CPU& cpu, u32& Cycles);
+        // static void STA_ABS_X(CPU& cpu, u32& Cycles);
+        // static void STA_ABS_Y(CPU& cpu, u32& Cycles);
+        // static void STA_IND_X(CPU& cpu, u32& Cycles);
+        // static void STA_IND_Y(CPU& cpu, u32& Cycles);
         
-        // STX
-        static void STX_ZP(CPU& cpu, u32& Cycles);
-        static void STX_ZP_Y(CPU& cpu, u32& Cycles);
-        static void STX_ABS(CPU& cpu, u32& Cycles);
+        // // STX
+        // static void STX_ZP(CPU& cpu, u32& Cycles);
+        // static void STX_ZP_Y(CPU& cpu, u32& Cycles);
+        // static void STX_ABS(CPU& cpu, u32& Cycles);
         
-        // STY
-        static void STY_ZP(CPU& cpu, u32& Cycles);
-        static void STY_ZP_X(CPU& cpu, u32& Cycles);
-        static void STY_ABS(CPU& cpu, u32& Cycles);
+        // // STY
+        // static void STY_ZP(CPU& cpu, u32& Cycles);
+        // static void STY_ZP_X(CPU& cpu, u32& Cycles);
+        // static void STY_ABS(CPU& cpu, u32& Cycles);
 
-        // Register Transfers
-        static void TAX(CPU& cpu, u32& Cycles);
-        static void TAY(CPU& cpu, u32& Cycles);
-        static void TXA(CPU& cpu, u32& Cycles);
-        static void TYA(CPU& cpu, u32& Cycles);
-        static void TSX(CPU& cpu, u32& Cycles);
-        static void TXS(CPU& cpu, u32& Cycles);
+        // // Register Transfers
+        // static void TAX(CPU& cpu, u32& Cycles);
+        // static void TAY(CPU& cpu, u32& Cycles);
+        // static void TXA(CPU& cpu, u32& Cycles);
+        // static void TYA(CPU& cpu, u32& Cycles);
+        // static void TSX(CPU& cpu, u32& Cycles);
+        // static void TXS(CPU& cpu, u32& Cycles);
 
-        // Stack Operations
-        static void PHA(CPU& cpu, u32& Cycles);
-        static void PHP(CPU& cpu, u32& Cycles);
-        static void PLA(CPU& cpu, u32& Cycles);
-        static void PLP(CPU& cpu, u32& Cycles);
+        // // Stack Operations
+        // static void PHA(CPU& cpu, u32& Cycles);
+        // static void PHP(CPU& cpu, u32& Cycles);
+        // static void PLA(CPU& cpu, u32& Cycles);
+        // static void PLP(CPU& cpu, u32& Cycles);
 
-        // Logical Operations
-        // AND
-        static void ANDSetStatus(CPU& cpu);
-        static void AND_IM(CPU& cpu, u32& Cycles);
-        static void AND_ZP(CPU& cpu, u32& Cycles);
-        static void AND_ZP_X(CPU& cpu, u32& Cycles);
-        static void AND_ABS(CPU& cpu, u32& Cycles);
-        static void AND_ABS_X(CPU& cpu, u32& Cycles);
-        static void AND_ABS_Y(CPU& cpu, u32& Cycles);
-        static void AND_IND_X(CPU& cpu, u32& Cycles);
-        static void AND_IND_Y(CPU& cpu, u32& Cycles);
+        // // Logical Operations
+        // // AND
+        // static void ANDSetStatus(CPU& cpu);
+        // static void AND_IM(CPU& cpu, u32& Cycles);
+        // static void AND_ZP(CPU& cpu, u32& Cycles);
+        // static void AND_ZP_X(CPU& cpu, u32& Cycles);
+        // static void AND_ABS(CPU& cpu, u32& Cycles);
+        // static void AND_ABS_X(CPU& cpu, u32& Cycles);
+        // static void AND_ABS_Y(CPU& cpu, u32& Cycles);
+        // static void AND_IND_X(CPU& cpu, u32& Cycles);
+        // static void AND_IND_Y(CPU& cpu, u32& Cycles);
         
-        // EOR
-        static void EORSetStatus(CPU& cpu);
-        static void EOR_IM(CPU& cpu, u32& Cycles);
-        static void EOR_ZP(CPU& cpu, u32& Cycles);
-        static void EOR_ZP_X(CPU& cpu, u32& Cycles);
-        static void EOR_ABS(CPU& cpu, u32& Cycles);
-        static void EOR_ABS_X(CPU& cpu, u32& Cycles);
-        static void EOR_ABS_Y(CPU& cpu, u32& Cycles);
-        static void EOR_IND_X(CPU& cpu, u32& Cycles);
-        static void EOR_IND_Y(CPU& cpu, u32& Cycles);
+        // // EOR
+        // static void EORSetStatus(CPU& cpu);
+        // static void EOR_IM(CPU& cpu, u32& Cycles);
+        // static void EOR_ZP(CPU& cpu, u32& Cycles);
+        // static void EOR_ZP_X(CPU& cpu, u32& Cycles);
+        // static void EOR_ABS(CPU& cpu, u32& Cycles);
+        // static void EOR_ABS_X(CPU& cpu, u32& Cycles);
+        // static void EOR_ABS_Y(CPU& cpu, u32& Cycles);
+        // static void EOR_IND_X(CPU& cpu, u32& Cycles);
+        // static void EOR_IND_Y(CPU& cpu, u32& Cycles);
         
-        // ORA
-        static void ORASetStatus(CPU& cpu);
-        static void ORA_IM(CPU& cpu, u32& Cycles);
-        static void ORA_ZP(CPU& cpu, u32& Cycles);
-        static void ORA_ZP_X(CPU& cpu, u32& Cycles);
-        static void ORA_ABS(CPU& cpu, u32& Cycles);
-        static void ORA_ABS_X(CPU& cpu, u32& Cycles);
-        static void ORA_ABS_Y(CPU& cpu, u32& Cycles);
-        static void ORA_IND_X(CPU& cpu, u32& Cycles);
-        static void ORA_IND_Y(CPU& cpu, u32& Cycles);
+        // // ORA
+        // static void ORASetStatus(CPU& cpu);
+        // static void ORA_IM(CPU& cpu, u32& Cycles);
+        // static void ORA_ZP(CPU& cpu, u32& Cycles);
+        // static void ORA_ZP_X(CPU& cpu, u32& Cycles);
+        // static void ORA_ABS(CPU& cpu, u32& Cycles);
+        // static void ORA_ABS_X(CPU& cpu, u32& Cycles);
+        // static void ORA_ABS_Y(CPU& cpu, u32& Cycles);
+        // static void ORA_IND_X(CPU& cpu, u32& Cycles);
+        // static void ORA_IND_Y(CPU& cpu, u32& Cycles);
         
-        // BIT
-        static void BITSetStatus(CPU& cpu);
-        static void BIT_ZP(CPU& cpu, u32& Cycles);
-        static void BIT_ABS(CPU& cpu, u32& Cycles);
+        // // BIT
+        // static void BITSetStatus(CPU& cpu);
+        // static void BIT_ZP(CPU& cpu, u32& Cycles);
+        // static void BIT_ABS(CPU& cpu, u32& Cycles);
 
-        // Arithmetic Operations
-        // ADC
-        static void ADCSetStatus(CPU& cpu);
-        static void ADC_IM(CPU& cpu, u32& Cycles);
-        static void ADC_ZP(CPU& cpu, u32& Cycles);
-        static void ADC_ZP_X(CPU& cpu, u32& Cycles);
-        static void ADC_ABS(CPU& cpu, u32& Cycles);
-        static void ADC_ABS_X(CPU& cpu, u32& Cycles);
-        static void ADC_ABS_Y(CPU& cpu, u32& Cycles);
-        static void ADC_IND_X(CPU& cpu, u32& Cycles);
-        static void ADC_IND_Y(CPU& cpu, u32& Cycles);
+        // // Arithmetic Operations
+        // // ADC
+        // static void ADCSetStatus(CPU& cpu);
+        // static void ADC_IM(CPU& cpu, u32& Cycles);
+        // static void ADC_ZP(CPU& cpu, u32& Cycles);
+        // static void ADC_ZP_X(CPU& cpu, u32& Cycles);
+        // static void ADC_ABS(CPU& cpu, u32& Cycles);
+        // static void ADC_ABS_X(CPU& cpu, u32& Cycles);
+        // static void ADC_ABS_Y(CPU& cpu, u32& Cycles);
+        // static void ADC_IND_X(CPU& cpu, u32& Cycles);
+        // static void ADC_IND_Y(CPU& cpu, u32& Cycles);
         
-        // SBC
-        static void SBCSetStatus(CPU& cpu);
-        static void SBC_IM(CPU& cpu, u32& Cycles);
-        static void SBC_ZP(CPU& cpu, u32& Cycles);
-        static void SBC_ZP_X(CPU& cpu, u32& Cycles);
-        static void SBC_ABS(CPU& cpu, u32& Cycles);
-        static void SBC_ABS_X(CPU& cpu, u32& Cycles);
-        static void SBC_ABS_Y(CPU& cpu, u32& Cycles);
-        static void SBC_IND_X(CPU& cpu, u32& Cycles);
-        static void SBC_IND_Y(CPU& cpu, u32& Cycles);
+        // // SBC
+        // static void SBCSetStatus(CPU& cpu);
+        // static void SBC_IM(CPU& cpu, u32& Cycles);
+        // static void SBC_ZP(CPU& cpu, u32& Cycles);
+        // static void SBC_ZP_X(CPU& cpu, u32& Cycles);
+        // static void SBC_ABS(CPU& cpu, u32& Cycles);
+        // static void SBC_ABS_X(CPU& cpu, u32& Cycles);
+        // static void SBC_ABS_Y(CPU& cpu, u32& Cycles);
+        // static void SBC_IND_X(CPU& cpu, u32& Cycles);
+        // static void SBC_IND_Y(CPU& cpu, u32& Cycles);
         
-        // Compare Operations
-        static void CMPSetStatus(CPU& cpu, Byte reg, Byte mem);
-        static void CMP_IM(CPU& cpu, u32& Cycles);
-        static void CMP_ZP(CPU& cpu, u32& Cycles);
-        static void CMP_ZP_X(CPU& cpu, u32& Cycles);
-        static void CMP_ABS(CPU& cpu, u32& Cycles);
-        static void CMP_ABS_X(CPU& cpu, u32& Cycles);
-        static void CMP_ABS_Y(CPU& cpu, u32& Cycles);
-        static void CMP_IND_X(CPU& cpu, u32& Cycles);
-        static void CMP_IND_Y(CPU& cpu, u32& Cycles);
+        // // Compare Operations
+        // static void CMPSetStatus(CPU& cpu, Byte reg, Byte mem);
+        // static void CMP_IM(CPU& cpu, u32& Cycles);
+        // static void CMP_ZP(CPU& cpu, u32& Cycles);
+        // static void CMP_ZP_X(CPU& cpu, u32& Cycles);
+        // static void CMP_ABS(CPU& cpu, u32& Cycles);
+        // static void CMP_ABS_X(CPU& cpu, u32& Cycles);
+        // static void CMP_ABS_Y(CPU& cpu, u32& Cycles);
+        // static void CMP_IND_X(CPU& cpu, u32& Cycles);
+        // static void CMP_IND_Y(CPU& cpu, u32& Cycles);
         
-        static void CPX_IM(CPU& cpu, u32& Cycles);
-        static void CPX_ZP(CPU& cpu, u32& Cycles);
-        static void CPX_ABS(CPU& cpu, u32& Cycles);
+        // static void CPX_IM(CPU& cpu, u32& Cycles);
+        // static void CPX_ZP(CPU& cpu, u32& Cycles);
+        // static void CPX_ABS(CPU& cpu, u32& Cycles);
         
-        static void CPY_IM(CPU& cpu, u32& Cycles);
-        static void CPY_ZP(CPU& cpu, u32& Cycles);
-        static void CPY_ABS(CPU& cpu, u32& Cycles);
+        // static void CPY_IM(CPU& cpu, u32& Cycles);
+        // static void CPY_ZP(CPU& cpu, u32& Cycles);
+        // static void CPY_ABS(CPU& cpu, u32& Cycles);
 
-        // Increments & Decrements
-        static void INCSetStatus(CPU& cpu);
-        static void INC_ZP(CPU& cpu, u32& Cycles);
-        static void INC_ZP_X(CPU& cpu, u32& Cycles);
-        static void INC_ABS(CPU& cpu, u32& Cycles);
-        static void INC_ABS_X(CPU& cpu, u32& Cycles);
-        static void INX(CPU& cpu, u32& Cycles);
-        static void INY(CPU& cpu, u32& Cycles);
+        // // Increments & Decrements
+        // static void INCSetStatus(CPU& cpu);
+        // static void INC_ZP(CPU& cpu, u32& Cycles);
+        // static void INC_ZP_X(CPU& cpu, u32& Cycles);
+        // static void INC_ABS(CPU& cpu, u32& Cycles);
+        // static void INC_ABS_X(CPU& cpu, u32& Cycles);
+        // static void INX(CPU& cpu, u32& Cycles);
+        // static void INY(CPU& cpu, u32& Cycles);
         
-        static void DECSetStatus(CPU& cpu);
-        static void DEC_ZP(CPU& cpu, u32& Cycles);
-        static void DEC_ZP_X(CPU& cpu, u32& Cycles);
-        static void DEC_ABS(CPU& cpu, u32& Cycles);
-        static void DEC_ABS_X(CPU& cpu, u32& Cycles);
-        static void DEX(CPU& cpu, u32& Cycles);
-        static void DEY(CPU& cpu, u32& Cycles);
+        // static void DECSetStatus(CPU& cpu);
+        // static void DEC_ZP(CPU& cpu, u32& Cycles);
+        // static void DEC_ZP_X(CPU& cpu, u32& Cycles);
+        // static void DEC_ABS(CPU& cpu, u32& Cycles);
+        // static void DEC_ABS_X(CPU& cpu, u32& Cycles);
+        // static void DEX(CPU& cpu, u32& Cycles);
+        // static void DEY(CPU& cpu, u32& Cycles);
 
-        // Shifts
-        static void ASLSetStatus(CPU& cpu);
-        static void ASL_ACC(CPU& cpu, u32& Cycles);
-        static void ASL_ZP(CPU& cpu, u32& Cycles);
-        static void ASL_ZP_X(CPU& cpu, u32& Cycles);
-        static void ASL_ABS(CPU& cpu, u32& Cycles);
-        static void ASL_ABS_X(CPU& cpu, u32& Cycles);
+        // // Shifts
+        // static void ASLSetStatus(CPU& cpu);
+        // static void ASL_ACC(CPU& cpu, u32& Cycles);
+        // static void ASL_ZP(CPU& cpu, u32& Cycles);
+        // static void ASL_ZP_X(CPU& cpu, u32& Cycles);
+        // static void ASL_ABS(CPU& cpu, u32& Cycles);
+        // static void ASL_ABS_X(CPU& cpu, u32& Cycles);
         
-        static void LSRSetStatus(CPU& cpu);
-        static void LSR_ACC(CPU& cpu, u32& Cycles);
-        static void LSR_ZP(CPU& cpu, u32& Cycles);
-        static void LSR_ZP_X(CPU& cpu, u32& Cycles);
-        static void LSR_ABS(CPU& cpu, u32& Cycles);
-        static void LSR_ABS_X(CPU& cpu, u32& Cycles);
+        // static void LSRSetStatus(CPU& cpu);
+        // static void LSR_ACC(CPU& cpu, u32& Cycles);
+        // static void LSR_ZP(CPU& cpu, u32& Cycles);
+        // static void LSR_ZP_X(CPU& cpu, u32& Cycles);
+        // static void LSR_ABS(CPU& cpu, u32& Cycles);
+        // static void LSR_ABS_X(CPU& cpu, u32& Cycles);
         
-        static void ROLSetStatus(CPU& cpu);
-        static void ROL_ACC(CPU& cpu, u32& Cycles);
-        static void ROL_ZP(CPU& cpu, u32& Cycles);
-        static void ROL_ZP_X(CPU& cpu, u32& Cycles);
-        static void ROL_ABS(CPU& cpu, u32& Cycles);
-        static void ROL_ABS_X(CPU& cpu, u32& Cycles);
+        // static void ROLSetStatus(CPU& cpu);
+        // static void ROL_ACC(CPU& cpu, u32& Cycles);
+        // static void ROL_ZP(CPU& cpu, u32& Cycles);
+        // static void ROL_ZP_X(CPU& cpu, u32& Cycles);
+        // static void ROL_ABS(CPU& cpu, u32& Cycles);
+        // static void ROL_ABS_X(CPU& cpu, u32& Cycles);
         
-        static void RORSetStatus(CPU& cpu);
-        static void ROR_ACC(CPU& cpu, u32& Cycles);
-        static void ROR_ZP(CPU& cpu, u32& Cycles);
-        static void ROR_ZP_X(CPU& cpu, u32& Cycles);
-        static void ROR_ABS(CPU& cpu, u32& Cycles);
-        static void ROR_ABS_X(CPU& cpu, u32& Cycles);
+        // static void RORSetStatus(CPU& cpu);
+        // static void ROR_ACC(CPU& cpu, u32& Cycles);
+        // static void ROR_ZP(CPU& cpu, u32& Cycles);
+        // static void ROR_ZP_X(CPU& cpu, u32& Cycles);
+        // static void ROR_ABS(CPU& cpu, u32& Cycles);
+        // static void ROR_ABS_X(CPU& cpu, u32& Cycles);
 
         // Jumps & Calls
         static void JMP_ABS(CPU& cpu, u32& Cycles);
@@ -423,120 +423,125 @@ class Inst {
         static void JSR_ABS(CPU& cpu, u32& Cycles);
         static void RTS(CPU& cpu, u32& Cycles);
 
-        // Branches
-        static void BranchRelative(CPU& cpu, u32& Cycles, bool condition);
-        static void BCC(CPU& cpu, u32& Cycles);
-        static void BCS(CPU& cpu, u32& Cycles);
-        static void BEQ(CPU& cpu, u32& Cycles);
-        static void BMI(CPU& cpu, u32& Cycles);
-        static void BNE(CPU& cpu, u32& Cycles);
-        static void BPL(CPU& cpu, u32& Cycles);
-        static void BVC(CPU& cpu, u32& Cycles);
-        static void BVS(CPU& cpu, u32& Cycles);
+        // // Branches
+        // static void BranchRelative(CPU& cpu, u32& Cycles, bool condition);
+        // static void BCC(CPU& cpu, u32& Cycles);
+        // static void BCS(CPU& cpu, u32& Cycles);
+        // static void BEQ(CPU& cpu, u32& Cycles);
+        // static void BMI(CPU& cpu, u32& Cycles);
+        // static void BNE(CPU& cpu, u32& Cycles);
+        // static void BPL(CPU& cpu, u32& Cycles);
+        // static void BVC(CPU& cpu, u32& Cycles);
+        // static void BVS(CPU& cpu, u32& Cycles);
 
-        // Status Flag Changes
-        static void CLC(CPU& cpu, u32& Cycles);
-        static void CLD(CPU& cpu, u32& Cycles);
-        static void CLI(CPU& cpu, u32& Cycles);
-        static void CLV(CPU& cpu, u32& Cycles);
-        static void SEC(CPU& cpu, u32& Cycles);
-        static void SED(CPU& cpu, u32& Cycles);
-        static void SEI(CPU& cpu, u32& Cycles);
+        // // Status Flag Changes
+        // static void CLC(CPU& cpu, u32& Cycles);
+        // static void CLD(CPU& cpu, u32& Cycles);
+        // static void CLI(CPU& cpu, u32& Cycles);
+        // static void CLV(CPU& cpu, u32& Cycles);
+        // static void SEC(CPU& cpu, u32& Cycles);
+        // static void SED(CPU& cpu, u32& Cycles);
+        // static void SEI(CPU& cpu, u32& Cycles);
 
-        // System Functions
-        static void BRK(CPU& cpu, u32& Cycles);
-        static void NOP(CPU& cpu, u32& Cycles);
-        static void RTI(CPU& cpu, u32& Cycles);
+        // // System Functions
+        // static void BRK(CPU& cpu, u32& Cycles);
+        // static void NOP(CPU& cpu, u32& Cycles);
+        // static void RTI(CPU& cpu, u32& Cycles);
 
         InstMap imap = {
             // Load/Store Operations (LDA, LDX, LDY, STA, STX, STY)
             {0xA9, LDA_IM},   {0xA5, LDA_ZP},   {0xB5, LDA_ZP_X}, {0xAD, LDA_ABS},
             {0xBD, LDA_ABS_X}, {0xB9, LDA_ABS_Y}, {0xA1, LDA_IND_X}, {0xB1, LDA_IND_Y},
 
-            {0xA2, LDX_IM},   {0xA6, LDX_ZP},   {0xB6, LDX_ZP_Y}, {0xAE, LDX_ABS},
-            {0xBE, LDX_ABS_Y},
+            // {0xA2, LDX_IM},   {0xA6, LDX_ZP},   {0xB6, LDX_ZP_Y}, {0xAE, LDX_ABS},
+            // {0xBE, LDX_ABS_Y},
 
-            {0xA0, LDY_IM},   {0xA4, LDY_ZP},   {0xB4, LDY_ZP_X}, {0xAC, LDY_ABS},
-            {0xBC, LDY_ABS_X},
+            // {0xA0, LDY_IM},   {0xA4, LDY_ZP},   {0xB4, LDY_ZP_X}, {0xAC, LDY_ABS},
+            // {0xBC, LDY_ABS_X},
 
-            {0x85, STA_ZP},   {0x95, STA_ZP_X}, {0x8D, STA_ABS},  {0x9D, STA_ABS_X},
-            {0x99, STA_ABS_Y}, {0x81, STA_IND_X}, {0x91, STA_IND_Y},
+            // {0x85, STA_ZP},   {0x95, STA_ZP_X}, {0x8D, STA_ABS},  {0x9D, STA_ABS_X},
+            // {0x99, STA_ABS_Y}, {0x81, STA_IND_X}, {0x91, STA_IND_Y},
 
-            {0x86, STX_ZP},   {0x96, STX_ZP_Y}, {0x8E, STX_ABS},
+            // {0x86, STX_ZP},   {0x96, STX_ZP_Y}, {0x8E, STX_ABS},
 
-            {0x84, STY_ZP},   {0x94, STY_ZP_X}, {0x8C, STY_ABS},
+            // {0x84, STY_ZP},   {0x94, STY_ZP_X}, {0x8C, STY_ABS},
 
-            // Register Transfers (TAX, TAY, TXA, TYA)
-            {0xAA, TAX}, {0xA8, TAY}, {0x8A, TXA}, {0x98, TYA},
+            // // Register Transfers (TAX, TAY, TXA, TYA)
+            // {0xAA, TAX}, {0xA8, TAY}, {0x8A, TXA}, {0x98, TYA},
 
-            // Stack Operations (TSX, TXS, PHA, PHP, PLA, PLP)
-            {0xBA, TSX}, {0x9A, TXS}, {0x48, PHA}, {0x08, PHP},
-            {0x68, PLA}, {0x28, PLP},
+            // // Stack Operations (TSX, TXS, PHA, PHP, PLA, PLP)
+            // {0xBA, TSX}, {0x9A, TXS}, {0x48, PHA}, {0x08, PHP},
+            // {0x68, PLA}, {0x28, PLP},
 
-            // Logical Operations (AND, EOR, ORA, BIT)
-            {0x29, AND_IM},   {0x25, AND_ZP},   {0x35, AND_ZP_X}, {0x2D, AND_ABS},
-            {0x3D, AND_ABS_X}, {0x39, AND_ABS_Y}, {0x21, AND_IND_X}, {0x31, AND_IND_Y},
+            // // Logical Operations (AND, EOR, ORA, BIT)
+            // {0x29, AND_IM},   {0x25, AND_ZP},   {0x35, AND_ZP_X}, {0x2D, AND_ABS},
+            // {0x3D, AND_ABS_X}, {0x39, AND_ABS_Y}, {0x21, AND_IND_X}, {0x31, AND_IND_Y},
 
-            {0x49, EOR_IM},   {0x45, EOR_ZP},   {0x55, EOR_ZP_X}, {0x4D, EOR_ABS},
-            {0x5D, EOR_ABS_X}, {0x59, EOR_ABS_Y}, {0x41, EOR_IND_X}, {0x51, EOR_IND_Y},
+            // {0x49, EOR_IM},   {0x45, EOR_ZP},   {0x55, EOR_ZP_X}, {0x4D, EOR_ABS},
+            // {0x5D, EOR_ABS_X}, {0x59, EOR_ABS_Y}, {0x41, EOR_IND_X}, {0x51, EOR_IND_Y},
 
-            {0x09, ORA_IM},   {0x05, ORA_ZP},   {0x15, ORA_ZP_X}, {0x0D, ORA_ABS},
-            {0x1D, ORA_ABS_X}, {0x19, ORA_ABS_Y}, {0x01, ORA_IND_X}, {0x11, ORA_IND_Y},
+            // {0x09, ORA_IM},   {0x05, ORA_ZP},   {0x15, ORA_ZP_X}, {0x0D, ORA_ABS},
+            // {0x1D, ORA_ABS_X}, {0x19, ORA_ABS_Y}, {0x01, ORA_IND_X}, {0x11, ORA_IND_Y},
 
-            {0x24, BIT_ZP},   {0x2C, BIT_ABS},
+            // {0x24, BIT_ZP},   {0x2C, BIT_ABS},
 
-            // Arithmetic Operations (ADC, SBC, CMP, CPX, CPY)
-            {0x69, ADC_IM},   {0x65, ADC_ZP},   {0x75, ADC_ZP_X}, {0x6D, ADC_ABS},
-            {0x7D, ADC_ABS_X}, {0x79, ADC_ABS_Y}, {0x61, ADC_IND_X}, {0x71, ADC_IND_Y},
+            // // Arithmetic Operations (ADC, SBC, CMP, CPX, CPY)
+            // {0x69, ADC_IM},   {0x65, ADC_ZP},   {0x75, ADC_ZP_X}, {0x6D, ADC_ABS},
+            // {0x7D, ADC_ABS_X}, {0x79, ADC_ABS_Y}, {0x61, ADC_IND_X}, {0x71, ADC_IND_Y},
 
-            {0xE9, SBC_IM},   {0xE5, SBC_ZP},   {0xF5, SBC_ZP_X}, {0xED, SBC_ABS},
-            {0xFD, SBC_ABS_X}, {0xF9, SBC_ABS_Y}, {0xE1, SBC_IND_X}, {0xF1, SBC_IND_Y},
+            // {0xE9, SBC_IM},   {0xE5, SBC_ZP},   {0xF5, SBC_ZP_X}, {0xED, SBC_ABS},
+            // {0xFD, SBC_ABS_X}, {0xF9, SBC_ABS_Y}, {0xE1, SBC_IND_X}, {0xF1, SBC_IND_Y},
 
-            {0xC9, CMP_IM},   {0xC5, CMP_ZP},   {0xD5, CMP_ZP_X}, {0xCD, CMP_ABS},
-            {0xDD, CMP_ABS_X}, {0xD9, CMP_ABS_Y}, {0xC1, CMP_IND_X}, {0xD1, CMP_IND_Y},
+            // {0xC9, CMP_IM},   {0xC5, CMP_ZP},   {0xD5, CMP_ZP_X}, {0xCD, CMP_ABS},
+            // {0xDD, CMP_ABS_X}, {0xD9, CMP_ABS_Y}, {0xC1, CMP_IND_X}, {0xD1, CMP_IND_Y},
 
-            {0xE0, CPX_IM},   {0xE4, CPX_ZP},   {0xEC, CPX_ABS},
+            // {0xE0, CPX_IM},   {0xE4, CPX_ZP},   {0xEC, CPX_ABS},
 
-            {0xC0, CPY_IM},   {0xC4, CPY_ZP},   {0xCC, CPY_ABS},
+            // {0xC0, CPY_IM},   {0xC4, CPY_ZP},   {0xCC, CPY_ABS},
 
-            // Increments & Decrements (INC, INX, INY, DEC, DEX, DEY)
-            {0xE6, INC_ZP},   {0xF6, INC_ZP_X}, {0xEE, INC_ABS},  {0xFE, INC_ABS_X},
+            // // Increments & Decrements (INC, INX, INY, DEC, DEX, DEY)
+            // {0xE6, INC_ZP},   {0xF6, INC_ZP_X}, {0xEE, INC_ABS},  {0xFE, INC_ABS_X},
 
-            {0xE8, INX}, {0xC8, INY}, {0xCA, DEX}, {0x88, DEY},
+            // {0xE8, INX}, {0xC8, INY}, {0xCA, DEX}, {0x88, DEY},
 
-            {0xC6, DEC_ZP},   {0xD6, DEC_ZP_X}, {0xCE, DEC_ABS},  {0xDE, DEC_ABS_X},
+            // {0xC6, DEC_ZP},   {0xD6, DEC_ZP_X}, {0xCE, DEC_ABS},  {0xDE, DEC_ABS_X},
 
-            // Shifts (ASL, LSR, ROL, ROR)
-            {0x0A, ASL_ABS},    {0x06, ASL_ZP},   {0x16, ASL_ZP_X}, {0x0E, ASL_ABS},
-            {0x1E, ASL_ABS_X},
+            // // Shifts (ASL, LSR, ROL, ROR)
+            // {0x0A, ASL_ABS},    {0x06, ASL_ZP},   {0x16, ASL_ZP_X}, {0x0E, ASL_ABS},
+            // {0x1E, ASL_ABS_X},
 
-            {0x4A, LSR_ABS},    {0x46, LSR_ZP},   {0x56, LSR_ZP_X}, {0x4E, LSR_ABS},
-            {0x5E, LSR_ABS_X},
+            // {0x4A, LSR_ABS},    {0x46, LSR_ZP},   {0x56, LSR_ZP_X}, {0x4E, LSR_ABS},
+            // {0x5E, LSR_ABS_X},
 
-            {0x2A, ROL_ABS},    {0x26, ROL_ZP},   {0x36, ROL_ZP_X}, {0x2E, ROL_ABS},
-            {0x3E, ROL_ABS_X},
+            // {0x2A, ROL_ABS},    {0x26, ROL_ZP},   {0x36, ROL_ZP_X}, {0x2E, ROL_ABS},
+            // {0x3E, ROL_ABS_X},
 
-            {0x6A, ROR_ABS},    {0x66, ROR_ZP},   {0x76, ROR_ZP_X}, {0x6E, ROR_ABS},
-            {0x7E, ROR_ABS_X},
+            // {0x6A, ROR_ABS},    {0x66, ROR_ZP},   {0x76, ROR_ZP_X}, {0x6E, ROR_ABS},
+            // {0x7E, ROR_ABS_X},
 
             // Jumps & Calls (JMP, JSR, RTS)
             {0x4C, JMP_ABS},  {0x6C, JMP_IND},  {0x20, JSR_ABS},      {0x60, RTS},
 
-            // Branches (BCC, BCS, BEQ, BMI, BNE, BPL, BVC, BVS)
-            {0x90, BCC}, {0xB0, BCS}, {0xF0, BEQ}, {0x30, BMI},
-            {0xD0, BNE}, {0x10, BPL}, {0x50, BVC}, {0x70, BVS},
+            // // Branches (BCC, BCS, BEQ, BMI, BNE, BPL, BVC, BVS)
+            // {0x90, BCC}, {0xB0, BCS}, {0xF0, BEQ}, {0x30, BMI},
+            // {0xD0, BNE}, {0x10, BPL}, {0x50, BVC}, {0x70, BVS},
 
-            // Status Flag Changes (CLC, CLD, CLI, CLV, SEC, SED, SEI)
-            {0x18, CLC}, {0xD8, CLD}, {0x58, CLI}, {0xB8, CLV},
-            {0x38, SEC}, {0xF8, SED}, {0x78, SEI},
+            // // Status Flag Changes (CLC, CLD, CLI, CLV, SEC, SED, SEI)
+            // {0x18, CLC}, {0xD8, CLD}, {0x58, CLI}, {0xB8, CLV},
+            // {0x38, SEC}, {0xF8, SED}, {0x78, SEI},
 
-            // System Functions (BRK, NOP, RTI)
-            {0x00, BRK}, {0xEA, NOP}, {0x40, RTI}
+            // // System Functions (BRK, NOP, RTI)
+            // {0x00, BRK}, {0xEA, NOP}, {0x40, RTI}
         };
 
         InstructionFunc getInstFunc(Byte Inst)
         {
             return imap[Inst];
+        }
+
+        bool checkInst(Byte Inst)
+        {
+            return !(imap.count(Inst) == 0);
         }
 };
 
@@ -548,24 +553,24 @@ struct InstCycles {
         { Inst::INST_LDA_ZP, 3 },
         { Inst::INST_LDA_ZP_X, 4 },
         { Inst::INST_LDA_ABS, 4 },
-        { Inst::INST_LDA_ABS_X, 4 },
-        { Inst::INST_LDA_ABS_Y, 4 },
+        { Inst::INST_LDA_ABS_X, 5 },  // 4 (+1 if page crossed)
+        { Inst::INST_LDA_ABS_Y, 5 },  // 4 (+1 if page crossed)
         { Inst::INST_LDA_IND_X, 6 },
-        { Inst::INST_LDA_IND_Y, 5 },
+        { Inst::INST_LDA_IND_Y, 6 },  // 5 (+1 if page crossed)
         
         // LDX
         { Inst::INST_LDX_IM, 2 },
         { Inst::INST_LDX_ZP, 3 },
         { Inst::INST_LDX_ZP_Y, 4 },
         { Inst::INST_LDX_ABS, 4 },
-        { Inst::INST_LDX_ABS_Y, 4 },
+        { Inst::INST_LDX_ABS_Y, 5 },  // 4 (+1 if page crossed)
         
         // LDY
         { Inst::INST_LDY_IM, 2 },
         { Inst::INST_LDY_ZP, 3 },
         { Inst::INST_LDY_ZP_X, 4 },
         { Inst::INST_LDY_ABS, 4 },
-        { Inst::INST_LDY_ABS_X, 4 },
+        { Inst::INST_LDY_ABS_X, 5 },  // 4 (+1 if page crossed)
         
         // STA
         { Inst::INST_STA_ZP, 3 },
